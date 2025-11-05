@@ -212,6 +212,8 @@ build_Psi <- function(treePlus, data) {
   Psi
 }
 
+build_Psi <- function(rf, data = NULL) {}
+
 rfPlus <- function(rf, X, y) {
   .normal_eqs <- function(X, y, w) {
     w <- as.numeric(w)
