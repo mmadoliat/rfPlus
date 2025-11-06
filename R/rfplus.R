@@ -110,7 +110,7 @@ node_memberships <- function(tree, data) {
   memb
 }
 
-getTreePlus <- function(tree, data) {
+tree2Plus <- function(tree, data) {
   J <- nrow(tree)
   memb <- node_memberships(tree, data)
 
@@ -137,6 +137,13 @@ getTreePlus <- function(tree, data) {
     }
   }
   class(treePlus) <- c("treePlus", class(tree))
+  treePlus
+}
+
+getTreePlus <- function(rf, k = 1, data = NULL) {
+  tree <- getTree(rf, k = k)
+  if (is.null(data)) {data <- rf$training_data}
+  treePlus <- tree2Plus(tree, data)
   treePlus
 }
 
@@ -169,7 +176,7 @@ getRfPlus <- function(rf, data = NULL, idx = NULL) {
       Xk <- A[,,k]
     }
 
-    out[[j]] <- getTreePlus(tree_k, Xk)
+    out[[j]] <- tree2Plus(tree_k, Xk)
   }
 
   names(out) <- paste0("tree_", idx)
@@ -177,7 +184,11 @@ getRfPlus <- function(rf, data = NULL, idx = NULL) {
   if (length(out) == 1L) out[[1L]] else out
 }
 
-build_Psi <- function(treePlus, data) {
+build_Psi <- function(x, ...) {
+  UseMethod("build_Psi")
+}
+
+build_Psi.treePlus <- function(treePlus, data) {
   data <- as.data.frame(data)
   n <- nrow(data)
 
@@ -212,7 +223,8 @@ build_Psi <- function(treePlus, data) {
   Psi
 }
 
-build_Psi <- function(rf, data = NULL) {}
+#A Task for Shahryar
+#build_Psi.rfPlus <- function(rf, data = NULL, idx = NULL) {}
 
 rfPlus <- function(rf, X, y) {
   .normal_eqs <- function(X, y, w) {
