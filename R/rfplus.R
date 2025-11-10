@@ -223,7 +223,7 @@ build_Psi.treePlus <- function(treePlus, data) {
   Psi
 }
 
-#A Task for Shahryar
+#A Task for Shahryarr
 #build_Psi.rfPlus <- function(rf, data = NULL, idx = NULL) {}
 
 rfPlus <- function(rf, X, y) {
