@@ -279,6 +279,6 @@ rfPlus <- function(rf, X, y) {
 
 print.rfPlus <- function(x, ...) {
   cat("rfols model with", x$ntree, "trees\n")
-  cat("Features:", paste(x$feature_names, collapsee = ", "), "\n")
+  cat("Features:", paste(x$feature_names, collapse = ", "), "\n")
   invisible(x)
 }
