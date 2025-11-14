@@ -11,7 +11,7 @@ rf <- function(formula = NULL, data = NULL,
 
   if (using_formula) {
     if (!inherits(formula, "formula")) stop("Please provide a model formula, e.g. y ~ .")
-    if (is.null(data)) stop(" dataset must be provided.")
+    if (is.null(data)) stop("A dataset must be provided.")
 
     if (anyNA(data)) {
       stop("Missing values detected in `data` for variables in the formula. Please clean NAs before calling rf().")
